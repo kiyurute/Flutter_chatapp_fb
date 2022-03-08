@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26529846347",
+    "project_id": "udemy-chat-4cbbc",
+    "storage_bucket": "udemy-chat-4cbbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26529846347:android:6e221828a02307a8bc29ce",
+        "android_client_info": {
+          "package_name": "com.example.first_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26529846347-9cggdh5rt33ctbvdlkoejqqotp63b56c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCapDsAc2FhXNbOOEa6ft9DgnuTshKD7Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26529846347-9cggdh5rt33ctbvdlkoejqqotp63b56c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
