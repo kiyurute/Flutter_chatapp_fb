@@ -120,7 +120,24 @@ class Firestore{
       );
       messageList.add(message);
     });
+    messageList.sort((a,b) => b.sendTime.compareTo(a.sendTime));
     return messageList;
+  }
+
+  static Future<void> sendMessage(String roomId,String message) async{
+    final messageRef = roomRef.doc(roomId).collection('message');
+    String myUid = SharedPrefs.getUid();
+    await messageRef.add({
+      'message':message,
+      'sender_id':myUid,
+      'send_time':Timestamp.now()
+    });
+
+
+  }
+
+  static Stream<QuerySnapshot> messageSnapshot(String roomId){
+    return roomRef.doc(roomId).collection('message').snapshots();
   }
 
 }
