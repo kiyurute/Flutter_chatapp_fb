@@ -78,7 +78,7 @@ class _TopPageState extends State<TopPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
                                 Text(talkUserList[index].talkUser.name,style:TextStyle(fontSize: 18, fontWeight:FontWeight.bold),),
-                                Text('userList[index].lastMessage',style:TextStyle(color:Colors.grey),),
+                                Text(talkUserList[index].lastMessage,style:TextStyle(color:Colors.grey),),
                               ],
                             )
                           ],

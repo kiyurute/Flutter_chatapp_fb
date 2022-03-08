@@ -133,6 +133,10 @@ class Firestore{
       'send_time':Timestamp.now()
     });
 
+    roomRef.doc(roomId).update({
+      'last_message':message
+    });
+
 
   }
 
