@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:first_project/model/user.dart';
+import 'package:first_project/utils/fire_base.dart';
+import 'package:first_project/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,6 +19,7 @@ class _SettingsProfileState extends State<SettingsProfile> {
   File? _image;
   final imagePicker = ImagePicker();
   String? imagePath;
+  TextEditingController controller = TextEditingController();
 
   Future<void> getImageFromGallery() async {
     print('in getImageFromGallery-------------');
@@ -66,7 +70,9 @@ class _SettingsProfileState extends State<SettingsProfile> {
             Row(
               children:[
                 Container(width:100,child:Text('名前')),
-                Expanded(child:TextField()),
+                Expanded(child:TextField(
+                  controller: controller,
+                )),
               ]
             ),
 
@@ -99,6 +105,20 @@ class _SettingsProfileState extends State<SettingsProfile> {
               width:200,
               height:200,
               child:Image.file(_image!, fit:BoxFit.cover),
+            ),
+
+            SizedBox(height:30),
+            ElevatedButton(
+              onPressed:(){
+                String uid = SharedPrefs.getUid();
+                User newProfile = User(
+                  name:controller.text,
+                  imagePath: imagePath!,
+                  uid: uid
+                );
+                Firestore.updateProfile(newProfile);
+              },
+              child:Text('編集'),
             )
     ]
 
