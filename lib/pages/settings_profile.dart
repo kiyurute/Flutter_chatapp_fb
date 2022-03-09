@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 
 class SettingsProfile extends StatefulWidget {
   const SettingsProfile({Key? key}) : super(key: key);
@@ -13,33 +15,43 @@ class SettingsProfile extends StatefulWidget {
 class _SettingsProfileState extends State<SettingsProfile> {
   File? _image;
   final imagePicker = ImagePicker();
+  String? imagePath;
 
   Future<void> getImageFromGallery() async {
     print('in getImageFromGallery-------------');
     final pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      print('not nll');
+      print('not null');
       _image = File(pickedFile.path);
-      setState(() {
-
-      });
+      uploadImage();
+      setState(() {});
     }
 
-    // setState(() {
-    //   if (pickedFile != null) {
-    //     _image = File(pickedFile.path);
-    //   }
-    // });
+  }
+
+  Future<String> uploadImage() async{
+    // try {
+    //   await FirebaseStorage.instance.ref('testimg.png').putFile(_image!);
+    // } on FirebaseException catch (e) {
+    //   print('in exception');
+    //   print(e);
+    // }
+
+    final ref = FirebaseStorage.instance.ref('test_pic.png3');
+    final storedImage = await ref.putFile(_image!);
+    imagePath = await loadImage(storedImage);
+    return imagePath.toString();
 
 
   }
 
-  // @override
-  // void initState() {
-  //   image = ;
-  //   super.initState();
-  // }
+  Future<String> loadImage(TaskSnapshot storedImage) async{
+    String downloadUrl = await storedImage.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
