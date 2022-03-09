@@ -38,7 +38,7 @@ class _TopPageState extends State<TopPage> {
           IconButton(
             icon:Icon(Icons.settings),
             onPressed:(){
-              Navigator.push(context,MaterialPageRoute(builder:(context) => SettingsProfilePage()));
+              Navigator.push(context,MaterialPageRoute(builder:(context) => SettingsProfile()));
             }
           )
         ]

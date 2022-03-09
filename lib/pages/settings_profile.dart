@@ -1,13 +1,46 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class SettingsProfilePage extends StatefulWidget {
-  const SettingsProfilePage({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class SettingsProfile extends StatefulWidget {
+  const SettingsProfile({Key? key}) : super(key: key);
 
   @override
-  _SettingsProfilePageState createState() => _SettingsProfilePageState();
+  _SettingsProfileState createState() => _SettingsProfileState();
 }
 
-class _SettingsProfilePageState extends State<SettingsProfilePage> {
+class _SettingsProfileState extends State<SettingsProfile> {
+  File? _image;
+  final imagePicker = ImagePicker();
+
+  Future<void> getImageFromGallery() async {
+    print('in getImageFromGallery-------------');
+    final pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      print('not nll');
+      _image = File(pickedFile.path);
+      setState(() {
+
+      });
+    }
+
+    // setState(() {
+    //   if (pickedFile != null) {
+    //     _image = File(pickedFile.path);
+    //   }
+    // });
+
+
+  }
+
+  // @override
+  // void initState() {
+  //   image = ;
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +68,26 @@ class _SettingsProfilePageState extends State<SettingsProfilePage> {
                     alignment: Alignment.center,
                     child: Container(
                       width:150,height:40, child: ElevatedButton(
-                        onPressed: (){},
-                        child: Text('画像を選択')
+                        child: Text('画像を選択'),
+                        onPressed: (){
+                          print('img button pressed----------------------');
+                          getImageFromGallery();
+                        },
+
                         ),
                     ),
                   ),
                 )
         ],
 
-    )
+    ),
+            SizedBox(height:30),
+
+            _image == null ? Container() : Container(
+              width:200,
+              height:200,
+              child:Image.file(_image!, fit:BoxFit.cover),
+            )
     ]
 
     ),
