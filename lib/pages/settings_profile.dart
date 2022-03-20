@@ -42,7 +42,8 @@ class _SettingsProfileState extends State<SettingsProfile> {
     //   print(e);
     // }
 
-    final ref = FirebaseStorage.instance.ref('test_pic.png3');
+    String myUid = SharedPrefs.getUid();
+    final ref = FirebaseStorage.instance.ref('$myUid.png');
     final storedImage = await ref.putFile(_image!);
     imagePath = await loadImage(storedImage);
     return imagePath.toString();
@@ -101,11 +102,25 @@ class _SettingsProfileState extends State<SettingsProfile> {
     ),
             SizedBox(height:30),
 
-            _image == null ? Container() : Container(
-              width:200,
-              height:200,
-              child:Image.file(_image!, fit:BoxFit.cover),
+            // _image == null ? Container() : Container(
+            //   width:200,
+            //   height:200,
+            //   child:Image.file(_image!, fit:BoxFit.cover),
+            // ),
+
+            _image == null
+                ? Container()
+                : Container(
+              child: ClipOval(
+                child: Image.file(
+                  _image!,
+                  fit: BoxFit.cover,
+                  width: 200,
+                  height: 200,
+                ),
+              ),
             ),
+
 
             SizedBox(height:30),
             ElevatedButton(
