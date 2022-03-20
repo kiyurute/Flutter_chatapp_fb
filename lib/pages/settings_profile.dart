@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_project/model/user.dart';
 import 'package:first_project/utils/fire_base.dart';
@@ -133,7 +134,7 @@ class _SettingsProfileState extends State<SettingsProfile> {
                 );
                 Firestore.updateProfile(newProfile);
               },
-              child:Text('編集'),
+              child:Text('保存'),
             )
     ]
 
@@ -141,7 +142,10 @@ class _SettingsProfileState extends State<SettingsProfile> {
     )
     );
   }
+
 }
+
+
 
 
 

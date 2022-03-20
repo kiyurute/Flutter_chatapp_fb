@@ -152,4 +152,10 @@ class Firestore{
     return roomRef.doc(roomId).collection('message').snapshots();
   }
 
+  //ここから改変分
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> myProfSnapshot(
+      String uid) {
+    return userRef.doc(uid).snapshots();
+  }
+
 }
